@@ -184,6 +184,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Identity\SsIdentityDbContext.cs" />
+    <Compile Include="Infrastructure\Identity\SsIdentityDbInitializer.cs" />
+    <Compile Include="Infrastructure\Identity\SsRole.cs" />
+    <Compile Include="Infrastructure\Identity\ssUser.cs" />
+    <Compile Include="Infrastructure\Identity\SsUserMeneger.cs" />
+    <Compile Include="Infrastructure\Identity\StoreRoleMeneger.cs" />
     <Compile Include="Models\Abstract\IRepository.cs" />
     <Compile Include="Models\Abstract\ProductRepository.cs" />
     <Compile Include="Models\DbConnect\ProductDbContext.cs" />
