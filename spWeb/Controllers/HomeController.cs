@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using spWeb.Infrastructure.Identity;
 using spWeb.Models.Abstract;
 using spWeb.Models.Entitys;
 
@@ -45,13 +48,13 @@ namespace spWeb.Controllers
         {
             return View(_repository.Orders);
         }
-
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> SaveProduct(Product product)
         {
             await _repository.SaveProductAsync(product);
             return RedirectToAction("Product");
         }
-
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteProduct(int id)
         {
             await _repository.DeleteProductAsync(id);
@@ -68,6 +71,22 @@ namespace spWeb.Controllers
         {
             await _repository.DeleteOrderAsync(id);
             return RedirectToAction("Orders");
-        } 
+        }
+
+        public async Task<ActionResult> SignIn()
+        {
+            var authMgr = HttpContext.GetOwinContext().Authentication;
+            var userMgr = HttpContext.GetOwinContext().GetUserManager<SsUserMeneger>();
+
+            var user = await userMgr.FindAsync("Admin", "secret");
+            authMgr.SignIn(await userMgr.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie));
+            return RedirectToAction("Product");
+        }
+
+        public ActionResult SignOut()
+        {
+            HttpContext.GetOwinContext().Authentication.SignOut();
+            return RedirectToAction("Index");
+        }
     }
 }

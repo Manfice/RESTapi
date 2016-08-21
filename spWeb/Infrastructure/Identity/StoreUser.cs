@@ -2,7 +2,7 @@
 
 namespace spWeb.Infrastructure.Identity
 {
-    public class SsUser:IdentityUser
+    public class StoreUser:IdentityUser
     {
          
     }

@@ -2,14 +2,14 @@
 
 namespace spWeb.Infrastructure.Identity
 {
-    public class SsRole:IdentityRole
+    public class StoreRole:IdentityRole
     {
-        public SsRole():base()
+        public StoreRole():base()
         {
             
         }
 
-        public SsRole(string name):base(name)
+        public StoreRole(string name):base(name)
         {
             
         }

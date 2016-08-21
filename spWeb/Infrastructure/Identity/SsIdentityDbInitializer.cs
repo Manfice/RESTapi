@@ -8,8 +8,8 @@ namespace spWeb.Infrastructure.Identity
     {
         protected override void Seed(SsIdentityDbContext context)
         {
-            var usrMeneger = new SsUserMeneger(new UserStore<SsUser>(context));
-            var rlMeneger = new StoreRoleMeneger(new RoleStore<SsRole>());
+            var usrMeneger = new SsUserMeneger(new UserStore<StoreUser>(context));
+            var rlMeneger = new StoreRoleMeneger(new RoleStore<StoreRole>(context));
 
             var roleName = "Administrator";
             var userName = "Admin";
@@ -18,20 +18,20 @@ namespace spWeb.Infrastructure.Identity
 
             if (!rlMeneger.RoleExists(roleName))
             {
-                rlMeneger.Create(new SsRole(roleName));
+                rlMeneger.Create(new StoreRole(roleName));
             }
 
             var user = usrMeneger.FindByName(userName);
             if (user == null)
             {
-                usrMeneger.Create(new SsUser
+                usrMeneger.Create(new StoreUser()
                 {
                     UserName = userName,
                     Email = email
-                },pass);
+                }, pass);
                 user = usrMeneger.FindByName(userName);
             }
-            if (!usrMeneger.IsInRole(user.Id,roleName))
+            if (!usrMeneger.IsInRole(user.Id, roleName))
             {
                 usrMeneger.AddToRole(user.Id, roleName);
             }

@@ -6,9 +6,9 @@ using Microsoft.Owin;
 
 namespace spWeb.Infrastructure.Identity
 {
-    public class SsUserMeneger:UserManager<SsUser>
+    public class SsUserMeneger:UserManager<StoreUser>
     {
-        public SsUserMeneger(IUserStore<SsUser> store):base(store)
+        public SsUserMeneger(IUserStore<StoreUser> store):base(store)
         {
             
         }
@@ -16,7 +16,7 @@ namespace spWeb.Infrastructure.Identity
         public static SsUserMeneger Create(IdentityFactoryOptions<SsUserMeneger> options, IOwinContext context)
         {
             var dbContext = context.Get<SsIdentityDbContext>();
-            var meneger = new SsUserMeneger(new UserStore<SsUser>(dbContext));
+            var meneger = new SsUserMeneger(new UserStore<StoreUser>(dbContext));
             return meneger;
         }
     }
