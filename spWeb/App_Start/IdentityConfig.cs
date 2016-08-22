@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.OAuth;
 using Owin;
 using spWeb.Infrastructure.Identity;
 
@@ -15,7 +16,14 @@ namespace spWeb
             app.CreatePerOwinContext<SsUserMeneger>(SsUserMeneger.Create);
             app.CreatePerOwinContext<StoreRoleMeneger>(StoreRoleMeneger.Create);
 
-            app.UseCookieAuthentication(new CookieAuthenticationOptions() {AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie});
+            //app.UseCookieAuthentication(new CookieAuthenticationOptions() {AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie});
+
+            app.UseOAuthBearerTokens(new OAuthAuthorizationServerOptions()
+            {
+                Provider = new StoreAuthProvider(),
+                AllowInsecureHttp = true,
+                TokenEndpointPath = new PathString("/Authenticate")
+            });
         }
     }
 }

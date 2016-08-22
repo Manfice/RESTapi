@@ -181,11 +181,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Identity\SsIdentityDbContext.cs" />
     <Compile Include="Infrastructure\Identity\SsIdentityDbInitializer.cs" />
+    <Compile Include="Infrastructure\Identity\StoreAuthProvider.cs" />
     <Compile Include="Infrastructure\Identity\StoreRole.cs" />
     <Compile Include="Infrastructure\Identity\StoreUser.cs" />
     <Compile Include="Infrastructure\Identity\SsUserMeneger.cs" />
